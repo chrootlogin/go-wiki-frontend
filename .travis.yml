@@ -10,6 +10,11 @@ jobs:
     go: "1.10.x"
     node_js: "lts/*"
 
+    cache:
+      directories:
+      - node_modules
+      - vendor
+
     before_script:
     - "curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh"
     - "go get -u github.com/go-bindata/go-bindata/..."
@@ -18,7 +23,7 @@ jobs:
     - # skip
 
     script:
-    - "make clean web_app go_plugin"
+    - "make web_app go_plugin"
 
   - sudo: required
 
