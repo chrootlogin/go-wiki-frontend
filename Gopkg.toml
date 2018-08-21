@@ -1,5 +1,3 @@
-ignored = ["github.com/chrootlogin/go-wiki-frontend/*"]
-
 [prune]
   go-tests = true
   unused-packages = true
