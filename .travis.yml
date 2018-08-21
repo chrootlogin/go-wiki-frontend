@@ -1,7 +1,7 @@
 addons:
-apt:
-  packages:
-  - nasm
+  apt:
+    packages:
+    - nasm
 
 jobs:
   include:
