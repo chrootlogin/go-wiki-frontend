@@ -2,6 +2,9 @@ addons:
   apt:
     packages:
     - nasm
+env:
+  global:
+  - "REPO=rootlogin/go-wiki-frontend"
 
 jobs:
   include:
@@ -32,4 +35,5 @@ jobs:
     - docker
 
     script:
-    - "docker build -t rootlogin/go-wiki-frontend ."
+    - 'export TAG=`if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then echo "latest"; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi`'
+    - 'docker build -t $REPO:$TAG .'
