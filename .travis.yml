@@ -31,13 +31,13 @@ jobs:
 
     deploy:
       - provider: script
-        script: curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:latest-$(date +%Y-%m-%d)" -H "X-Bintray-Override:1" "https://api.bintray.com/content/rootlogin/go-wiki-plugins/frontend_plugin"
+        script: curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:latest-$(date +%Y-%m-%d)" -H "X-Bintray-Override:1" "https://api.bintray.com/content/rootlogin/go-wiki-plugins/latest-$(date +%Y-%m-%d)/frontend_plugin"
         skip_cleanup: true
         on:
           branch: master
 
       - provider: script
-        script: curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:$TRAVIS_TAG" -H "X-Bintray-Override:1" "https://api.bintray.com/content/rootlogin/go-wiki-plugins/frontend_plugin"
+        script: curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:$TRAVIS_TAG" -H "X-Bintray-Override:1" "https://api.bintray.com/content/rootlogin/go-wiki-plugins/$TRAVIS_TAG/frontend_plugin"
         skip_cleanup: true
         on:
           tags: true
