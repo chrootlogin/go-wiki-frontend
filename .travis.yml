@@ -30,8 +30,17 @@ jobs:
     - make web_app go_plugin
 
     deploy:
-      provider: script
-      script: if [ $TRAVIS_BRANCH == "master" ]; then curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:latest-$(date +%Y-%m-%d)" -H "X-Bintray-Override:1" "https://api.bintray.com/content/go-wiki/go-wiki-plugins/frontend_plugin"; fi
+      - provider: script
+        script: curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:latest-$(date +%Y-%m-%d)" -H "X-Bintray-Override:1" "https://api.bintray.com/content/go-wiki/go-wiki-plugins/frontend_plugin"
+        skip_cleanup: true
+        on:
+          branch: master
+
+      - provider: script
+        script: curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:$TRAVIS_TAG" -H "X-Bintray-Override:1" "https://api.bintray.com/content/go-wiki/go-wiki-plugins/frontend_plugin"
+        skip_cleanup: true
+        on:
+          tags: true
 
   - language: go
     go: 1.10.x
