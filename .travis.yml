@@ -4,36 +4,31 @@ addons:
     - nasm
 env:
   global:
-  - "REPO=rootlogin/go-wiki-frontend"
-
+  - DOCKER_REPO=rootlogin/go-wiki-frontend
+  - secure: mCBcStl/VCAb7IC//8jWn+U4Bx5mYTpVbBhbNS7uIkfQTQPvSM2WpoKzNRk4xiR5qIl7nIbBNl/ExbfL40h84RW2t9WBg5xvYBLsaiKbi4VAucUKwnVCLCcpMbh0BHPFvStmGoTdEW3V5faVqAG/FLzW9yElFq5RGiKcr3nAYcqFIy78ed75STmkpo8aetZoWrKym149sU1986RPS6T5N9Zn2p611KQ/LMY9p8NC0PWbIYNJpbMwAzDgAbUbNPqZK/E1l02cvwqW8lKnZBB7jUMNyCRjQ8uieHxG2t4IssjhyHD0N4VyPCj40/UJYGSwnGtJt/CEGgVv4yN9EtA9dQRYpXpzVhKmgRVVmT2H8he33Xlg0jhrjwln9wjzXRq7ppApqayPqcG5hHuQfUOGJk1Wx9pXDNFBiTbVNyab2xh7kTx6VoqKw6U8dpwPVj9kGEGrrWPCET0yXXXabLBlztt6mlGQEao/ME+Upn86Ub8dFziJYihnfmezOwBmgsRakWbsYE2bnE0HHVKCRTlRtF6qfOlAwKgWE5pHmzTG+pSINM3ANp3JshEdLpuqVo18DRGWUdIR8iOOd7dt3eWPzqO74mMLyqFZn1EAnUweAf8mqtf2zF8hZ8cPv8RQTyfRoevkfd/bEGacbtthBmhH08wC9gbSoHqwl3xJBqC7GUU=
 jobs:
   include:
   - language: go
-
-    go: "1.10.x"
-    node_js: "lts/*"
-
+    go: 1.10.x
+    node_js: lts/*
     cache:
       directories:
       - node_modules
       - vendor
-
     before_script:
-    - "npm install -g npm"
-    - "curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh"
-    - "go get -u github.com/go-bindata/go-bindata/..."
-
+    - npm install -g npm
+    - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+    - go get -u github.com/go-bindata/go-bindata/...
     install:
-    - # skip
-
+    - 
     script:
-    - "make web_app go_plugin"
-
+    - make web_app go_plugin
+    after_success:
+    - curl -T frontend_plugin -urootlogin:$BINTRAY_API_KEY https://api.bintray.com/content/go-wiki/go-wiki-plugins/frontend/$TRAVIS_BRANCH/frontend_plugin
   - sudo: required
-
     services:
     - docker
-
     script:
-    - 'export TAG=`if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then echo "latest"; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi`'
-    - 'docker build -t $REPO:$TAG .'
+    - export TAG=`if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH ==
+      "master" ]]; then echo "latest"; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi`
+    - docker build -t $DOCKER_REPO:$TAG .
