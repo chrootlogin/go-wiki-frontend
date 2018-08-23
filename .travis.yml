@@ -2,10 +2,12 @@ addons:
   apt:
     packages:
     - nasm
+
 env:
   global:
   - DOCKER_REPO=rootlogin/go-wiki-frontend
   - secure: Y52cQMxYyAwLs2MJg6qL5zCcZnm06X5mVLGcAJoIIJ+yrF1J5ePktuD/vNm51c4UAdIFNpQztveiHNoikwzJQ3lS2/RFUqJXTr+c5b62ZtI26p9WTQDXIHlaD6oRJKX8nvE/wB3LCkLvbH5pPFvyvrXYfewHtB0Glwk8tbiQTjknCczPSJBm8ONy4/D6lZ+B48xiS/jC0J6aALL2DjAt+WzdXbTSuA3L5B59TjnMkOh97Mf+uxwiqYA+w9hHvzZWKyuZ31RkC4aIjcHil3IaqK+94Eg/uCY6ijwu3eJ1oT8EZPHeFjngO9NVNhMlz9muHL1hM3LqK51Ddq/u3JvnhoLIO31QP2KZK4nc8sIjZVvmePOKnuGkabwzhJzQxaXLVwkwpgtp2ZtCV7F439ZtlkXvDaax97TssJkZWuWAs3+dVyMyPnFR65GwVGObpEgriwBUY68n6SorXGf3wpQJ4srCa64DNgImtXbmU8r3HRD2QddlX63bdGlt7vxqWmUgbM5RQLgOXNfhv3Ontas29+WhAczvXrTZkrvoQBmymzZI/boQXBg9KswrFs9GLQqlBgH7UZhyroIuByfvYTJ05DyE+2VXzw/Rwp2qekcyq20ugDgrhVlphDYCjv4kb5uWFG02DFhZV9/2lr3HCG/mn4BmczpzwPrfOtfelox+qP0=
+
 jobs:
   include:
   - language: go
@@ -15,21 +17,26 @@ jobs:
       directories:
       - node_modules
       - vendor
+
     before_script:
     - npm install -g npm
     - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
     - go get -u github.com/go-bindata/go-bindata/...
+
     install:
     - 
+
     script:
     - make web_app go_plugin
-    after_success:
-    - "$TRAVIS_BRANCH" == "master" && curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:latest-$(date +%Y-%m-%d)" -H "X-Bintray-Override:1" -H "X-Bintray-Explode:1" "https://api.bintray.com/content/go-wiki/go-wiki-plugins/frontend_plugin"
 
-  - sudo: required
+    after_success:
+    - if [ $TRAVIS_BRANCH == "master" ]; then curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:latest-$(date +%Y-%m-%d)" -H "X-Bintray-Override:1" -H "X-Bintray-Explode:1" "https://api.bintray.com/content/go-wiki/go-wiki-plugins/frontend_plugin"; fi
+
+  - language: go
+    go: 1.10.x
+    sudo: required
     services:
     - docker
     script:
-    - export TAG=`if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH ==
-      "master" ]]; then echo "latest"; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi`
+    - export TAG=`if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then echo "latest"; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi`
     - docker build -t $DOCKER_REPO:$TAG .
