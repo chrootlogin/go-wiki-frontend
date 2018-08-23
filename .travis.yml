@@ -24,7 +24,7 @@ jobs:
     script:
     - make web_app go_plugin
     after_success:
-    - curl -T frontend_plugin -urootlogin:$BINTRAY_API_KEY https://api.bintray.com/content/go-wiki/go-wiki-plugins/frontend/$TRAVIS_BRANCH/frontend_plugin
+    - curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:$TRAVIS_BRANCH" -H "X-Bintray-Override:1" "https://api.bintray.com/content/go-wiki/go-wiki-plugins/frontend_plugin"
   - sudo: required
     services:
     - docker
