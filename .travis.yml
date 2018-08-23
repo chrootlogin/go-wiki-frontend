@@ -24,10 +24,7 @@ jobs:
     script:
     - make web_app go_plugin
     after_success:
-    - [ "$TRAVIS_BRANCH" == "master" ] && curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY"
-      -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:latest-`date +%Y-%m-%d`"
-      -H "X-Bintray-Override:1" -H "X-Bintray-Explode:1"
-      "https://api.bintray.com/content/go-wiki/go-wiki-plugins/frontend_plugin"
+    - "$TRAVIS_BRANCH" == "master" && curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:latest-$(date +%Y-%m-%d)" -H "X-Bintray-Override:1" -H "X-Bintray-Explode:1" "https://api.bintray.com/content/go-wiki/go-wiki-plugins/frontend_plugin"
 
   - sudo: required
     services:
