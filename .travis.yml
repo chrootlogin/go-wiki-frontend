@@ -24,7 +24,7 @@ jobs:
     - go get -u github.com/go-bindata/go-bindata/...
 
     install:
-    - 
+    - # skip
 
     script:
     - make web_app go_plugin
