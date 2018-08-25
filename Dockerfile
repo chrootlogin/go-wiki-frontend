@@ -1,19 +1,16 @@
 # Build build-container
-FROM node:8-alpine as builder
+FROM node:8 as builder
 
 COPY . /tmp/go-wiki-frontend
 
 RUN set -ex \
-  && apk -U --no-cache add \
-    alpine-sdk \
-    autoconf \
-    automake \
-    gettext \
-    libpng-dev \
-    libtool \
-    nasm \
-  && cd /tmp/go-wiki-frontend \
-  && make clean all
+    && apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install \
+    nasm
+
+WORKDIR /tmp/go-wiki-frontend
+
+RUN make clean all
 
 FROM nginx:mainline-alpine
 
