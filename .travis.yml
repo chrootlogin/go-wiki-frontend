@@ -8,6 +8,8 @@ env:
   - DOCKER_REPO=rootlogin/go-wiki-frontend
   - secure: FgH66Q7bvzVRRdhAf6OqK6g0d6MKseQxr5TFOy9wOcCoUWZ8MY64yLRA9FP+sBtFmWpOKNEF4wfLxQCEX1mKAzZMsU49AU4/ehWZVqWSJ5qZQNm9AvKsOSxcm9/K/SYQDEWF9Wc7a5AdO33Jsp9gr36zg1hxRUJruv80wwturXwaa2dmnGI3l43FwBx3D4mAbRGn2wchJuX/Z4N33UncOec6+XBeojrRmoQ6mjk7euhTnBTxyWfm7YhlKMuJ2esQ/VBnM+PKh6C5z+TxIqBGhh6z4W9fCf2jxeZKifkOcu9kVR9bL4yciqK3zXqVlXouoX88GJWmcNWlpq5g7jAewDA/uMTkaMUxG+dEtQLOnTxRSDwi0ydap/RIubiN2sIQ4gcYgzQYEWZKr6OqLrRa+fNRfPIRaoPeq5RDfFvL0cQUSlOr0PagIiDoU8arRT25ikFTjkyrWYGukHvNoRDLnNl3PqcC/IbzgKt4px4bYQjGzGVeR2RX5lmatPXnJqHNPM3WW8zafkwQzVUZuwXdWgYn5U4sKUQoyMVT+xP5HxwhhOtkcxxPy5ApqkhgCejkImlGAwO3LovsiAim+yU0MWD5sPJz12b6pX//e0dCzkPhaGhrGABpg2UxhqT6ulQGTYk1Y6gzV9gnv4wvRubYknDoWtubOFSdVXoh65EHUHU=
   - secure: Y52cQMxYyAwLs2MJg6qL5zCcZnm06X5mVLGcAJoIIJ+yrF1J5ePktuD/vNm51c4UAdIFNpQztveiHNoikwzJQ3lS2/RFUqJXTr+c5b62ZtI26p9WTQDXIHlaD6oRJKX8nvE/wB3LCkLvbH5pPFvyvrXYfewHtB0Glwk8tbiQTjknCczPSJBm8ONy4/D6lZ+B48xiS/jC0J6aALL2DjAt+WzdXbTSuA3L5B59TjnMkOh97Mf+uxwiqYA+w9hHvzZWKyuZ31RkC4aIjcHil3IaqK+94Eg/uCY6ijwu3eJ1oT8EZPHeFjngO9NVNhMlz9muHL1hM3LqK51Ddq/u3JvnhoLIO31QP2KZK4nc8sIjZVvmePOKnuGkabwzhJzQxaXLVwkwpgtp2ZtCV7F439ZtlkXvDaax97TssJkZWuWAs3+dVyMyPnFR65GwVGObpEgriwBUY68n6SorXGf3wpQJ4srCa64DNgImtXbmU8r3HRD2QddlX63bdGlt7vxqWmUgbM5RQLgOXNfhv3Ontas29+WhAczvXrTZkrvoQBmymzZI/boQXBg9KswrFs9GLQqlBgH7UZhyroIuByfvYTJ05DyE+2VXzw/Rwp2qekcyq20ugDgrhVlphDYCjv4kb5uWFG02DFhZV9/2lr3HCG/mn4BmczpzwPrfOtfelox+qP0=
+  - secure: GKeJ14uLe52k04hKkeFA95yXsXSgmc0LDbRvUOxxGNVNvz+UIgLw/4WD9Tt5601U6s4WBpX1VUvk45vKQMwhat2vecqG+chZUugmduJlO2zmyC3Z540/Z3oDEqkpdWVgVARYUJbGXzaBS7oMdpWCCnp1R8YoOGdds/z8UaC6o0tFA6bzozlPb75yM8nmu7/UlkcH0twvCn4D5ZLjdZcBoKXjKyxxYmwU0XzEydjh3L9xCcrIKZVO3Zrb9twGjo5Cob0zZPWONStihe4b1eaQsnqrafVL2eGUVi4sjFsYZ+4EMPxV+DL+4693xXKojgtq08UEwP/KdPkfTk7j6FFJC520OthsdILKLAKrWzXh+0MHEEKRDbDW4C7IBNGrCkhzujbleEdNrg7+4nNmIxiS4TMtUnm/9a8mkFiOtQrEh/m/S8wWJ4DpqIMMUWXtgBzK7/vAZUSWDbERHj+dsHZqpWC7ZyUeOSCqjeOLy+4CfNRvhpoGssMYo+Rk4sYFsjQt8+nQb0JRFyLhIxx5vL9I90qlsmAQ8LzgPuhV6BOOdTQoQ2OfXgJk0fO9bfMf32LafwmzDDhezsdmyltaxbvLmMVkeRCqGc8fSoG141n9KkHYDyb/a7/+mRKWbDO6gt0jBilQAdaFyeRXOF6h61TXjX1CiZnBnpWuFZ5zWCNgMEg=
+  - secure: hdX2HSoKLP6M7Q6CAEgfXxsTc1FyfBKilM1QHUzQoKR/9xWht2WOdmAc7bfbBNSWfwQ/n6iZuNXg4ScOYyZas57sClBJFKXBVGjc8zAEpcPBcZaTT19WRcjubi1vH18D0r50ASiy4AFEUFeZiBZwPS4Mt8EbK7Xcox23+VaTDpIP/cel9B+a9fFReiocZroYb4vab83L0BSlDZRyMeswP590lHblB2DX1H/sNzpkIg/eL3ntfiLLjW7osZ1msQA3e2wX0ysGL1Iqit+slqJAf4WbmXKLqfD5PbjJD9j1GLdbpQ7t53W/5wXbAPd2xMvM4u+3aUu3pr9k6zgz0T0zh0OE2nmIZG+wWWsiEef/1WyHvCYLLuGZaakMyAQrFWn4oQ17liOw3wCU06aY0VIJEWaAAIoqEQOv4GQ+zjE/8ZvKkgBPs3s0eaHWdX7uJHHY/sG9OzRjvvWsyGVvifV0DM3dof0+jRReMZC7+ZzVeHR0rQnpZBeNDVcEBt+4UJnYvMED3g1ynUIvLrMWUc+umgJM25LtBbUeP/eCwKIkFq3RqnbCBqsLidWTKVEZw0B9SYZSRaHdDvhXBjifHNvAsw0mu20vtsXxnOv6UcMk7x4EVA8XYn/RRfU+sQ1bz3J0pO0VYk+5E7GYl7um0pxa9MJMja7DNUdyEfleoJiTpBQ=
 
 jobs:
   include:
@@ -46,9 +48,19 @@ jobs:
   - language: go
     go: 1.10.x
     sudo: required
+
     if: (tag =~ ^v) OR (branch IN (master, develop))
+
     services:
     - docker
+
     script:
     - export DOCKER_TAG=$(if [[ $TRAVIS_BRANCH == "master" ]]; then echo "latest"; else echo $TRAVIS_BRANCH; fi)
-    - docker build -t $DOCKER_REPO:$DOCKER_TAG .
+    - docker build --build-arg VCS_REF=$(git rev-parse --short HEAD) --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") -t $DOCKER_REPO:$DOCKER_TAG .
+
+    before_deploy:
+    - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+
+    deploy:
+      provider: script
+      script: docker push $DOCKER_REPO:$DOCKER_TAG
