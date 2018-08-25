@@ -59,9 +59,6 @@ jobs:
     - export DOCKER_TAG=$(if [[ $TRAVIS_BRANCH == "master" ]]; then echo "latest"; else echo $TRAVIS_BRANCH; fi)
     - docker build --build-arg VCS_REF=$(git rev-parse --short HEAD) --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") -t $DOCKER_REPO:$DOCKER_TAG .
 
-    before_deploy:
+    after_success:
     - echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USER --password-stdin
-
-    deploy:
-      provider: script
-      script: docker push $DOCKER_REPO:$DOCKER_TAG
+    - docker push $DOCKER_REPO:$DOCKER_TAG
