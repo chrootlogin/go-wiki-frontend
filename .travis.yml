@@ -1,8 +1,3 @@
-addons:
-  apt:
-    packages:
-    - nasm
-
 env:
   global:
   - DOCKER_REPO=rootlogin/go-wiki-frontend
@@ -16,6 +11,12 @@ jobs:
   - language: go
     go: 1.10.x
     node_js: lts/*
+
+    addons:
+      apt:
+        packages:
+        - nasm
+
     cache:
       directories:
       - node_modules
