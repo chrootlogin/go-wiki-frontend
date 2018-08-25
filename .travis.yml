@@ -6,6 +6,7 @@ addons:
 env:
   global:
   - DOCKER_REPO=rootlogin/go-wiki-frontend
+  - secure: FgH66Q7bvzVRRdhAf6OqK6g0d6MKseQxr5TFOy9wOcCoUWZ8MY64yLRA9FP+sBtFmWpOKNEF4wfLxQCEX1mKAzZMsU49AU4/ehWZVqWSJ5qZQNm9AvKsOSxcm9/K/SYQDEWF9Wc7a5AdO33Jsp9gr36zg1hxRUJruv80wwturXwaa2dmnGI3l43FwBx3D4mAbRGn2wchJuX/Z4N33UncOec6+XBeojrRmoQ6mjk7euhTnBTxyWfm7YhlKMuJ2esQ/VBnM+PKh6C5z+TxIqBGhh6z4W9fCf2jxeZKifkOcu9kVR9bL4yciqK3zXqVlXouoX88GJWmcNWlpq5g7jAewDA/uMTkaMUxG+dEtQLOnTxRSDwi0ydap/RIubiN2sIQ4gcYgzQYEWZKr6OqLrRa+fNRfPIRaoPeq5RDfFvL0cQUSlOr0PagIiDoU8arRT25ikFTjkyrWYGukHvNoRDLnNl3PqcC/IbzgKt4px4bYQjGzGVeR2RX5lmatPXnJqHNPM3WW8zafkwQzVUZuwXdWgYn5U4sKUQoyMVT+xP5HxwhhOtkcxxPy5ApqkhgCejkImlGAwO3LovsiAim+yU0MWD5sPJz12b6pX//e0dCzkPhaGhrGABpg2UxhqT6ulQGTYk1Y6gzV9gnv4wvRubYknDoWtubOFSdVXoh65EHUHU=
   - secure: Y52cQMxYyAwLs2MJg6qL5zCcZnm06X5mVLGcAJoIIJ+yrF1J5ePktuD/vNm51c4UAdIFNpQztveiHNoikwzJQ3lS2/RFUqJXTr+c5b62ZtI26p9WTQDXIHlaD6oRJKX8nvE/wB3LCkLvbH5pPFvyvrXYfewHtB0Glwk8tbiQTjknCczPSJBm8ONy4/D6lZ+B48xiS/jC0J6aALL2DjAt+WzdXbTSuA3L5B59TjnMkOh97Mf+uxwiqYA+w9hHvzZWKyuZ31RkC4aIjcHil3IaqK+94Eg/uCY6ijwu3eJ1oT8EZPHeFjngO9NVNhMlz9muHL1hM3LqK51Ddq/u3JvnhoLIO31QP2KZK4nc8sIjZVvmePOKnuGkabwzhJzQxaXLVwkwpgtp2ZtCV7F439ZtlkXvDaax97TssJkZWuWAs3+dVyMyPnFR65GwVGObpEgriwBUY68n6SorXGf3wpQJ4srCa64DNgImtXbmU8r3HRD2QddlX63bdGlt7vxqWmUgbM5RQLgOXNfhv3Ontas29+WhAczvXrTZkrvoQBmymzZI/boQXBg9KswrFs9GLQqlBgH7UZhyroIuByfvYTJ05DyE+2VXzw/Rwp2qekcyq20ugDgrhVlphDYCjv4kb5uWFG02DFhZV9/2lr3HCG/mn4BmczpzwPrfOtfelox+qP0=
 
 jobs:
@@ -31,13 +32,13 @@ jobs:
 
     deploy:
       - provider: script
-        script: curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:latest-$(date +%Y-%m-%d)" -H "X-Bintray-Override:1" "https://api.bintray.com/content/rootlogin/go-wiki-plugins/latest-$(date +%Y-%m-%d)/frontend_plugin"
+        script: curl -T "frontend_plugin" -u "$BINTRAY_USER:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:latest-$(date +%Y-%m-%d)" -H "X-Bintray-Override:1" "https://api.bintray.com/content/rootlogin/go-wiki-plugins/latest-$(date +%Y-%m-%d)/frontend_plugin"
         skip_cleanup: true
         on:
           branch: master
 
       - provider: script
-        script: curl -T "frontend_plugin" -u "rootlogin:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:$TRAVIS_TAG" -H "X-Bintray-Override:1" "https://api.bintray.com/content/rootlogin/go-wiki-plugins/$TRAVIS_TAG/frontend_plugin"
+        script: curl -T "frontend_plugin" -u "$BINTRAY_USER:$BINTRAY_API_KEY" -H "X-Bintray-Publish:1" -H "X-Bintray-Package:frontend" -H "X-Bintray-Version:$TRAVIS_TAG" -H "X-Bintray-Override:1" "https://api.bintray.com/content/rootlogin/go-wiki-plugins/$TRAVIS_TAG/frontend_plugin"
         skip_cleanup: true
         on:
           tags: true
