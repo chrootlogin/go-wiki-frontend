@@ -45,8 +45,9 @@ jobs:
   - language: go
     go: 1.10.x
     sudo: required
+    if: (tag =~ ^v) OR (branch IN (master, develop))
     services:
     - docker
     script:
-    - export TAG=`if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then echo "latest"; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi`
-    - docker build -t $DOCKER_REPO:$TAG .
+    - export DOCKER_TAG=$(if [[ $TRAVIS_BRANCH == "master" ]]; then echo "latest"; else echo $TRAVIS_BRANCH; fi)
+    - docker build -t $DOCKER_REPO:$DOCKER_TAG .
