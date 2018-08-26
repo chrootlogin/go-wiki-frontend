@@ -29,6 +29,45 @@
             class="content"
             v-html="preview"/>
         </b-tab-item>
+        <b-tab-item label="Files">
+          <b-table
+            :data="files.files"
+            :hoverable="true"
+            default-sort="name">
+            <template
+              slot-scope="props">
+              <b-table-column
+                field="name"
+                label="Name"
+                sortable>
+                <a @click="redirectToPage(folder(path) + props.row.name)">{{ props.row.name }}</a>
+              </b-table-column>
+              <b-table-column
+                field="size"
+                label="Size">
+                {{ humanFileSize(props.row.size, true) }}
+              </b-table-column>
+              <b-table-column
+                field="modTime"
+                label="Last modified"
+                centered>
+                {{ props.row.modtime }}
+              </b-table-column>
+            </template>
+            <template slot="empty">
+              <section class="section">
+                <div class="content has-text-grey has-text-centered">
+                  <p>
+                    <b-icon
+                      icon="emoticon-sad"
+                      size="is-large"/>
+                  </p>
+                  <p>Nothing here.</p>
+                </div>
+              </section>
+            </template>
+          </b-table>
+        </b-tab-item>
         <b-tab-item label="Settings">
           <b-field label="Path">
             <b-input
@@ -77,7 +116,11 @@ export default {
         content: ''
       },
       activeEditorTab: 0,
-      preview: ''
+      preview: '',
+      files: {
+        files: [],
+        path: ''
+      }
     }
   },
   computed: {
@@ -106,7 +149,7 @@ export default {
     this.loadAsyncPageData()
   },
   methods: {
-    loadAsyncPageData: function () {
+    loadAsyncPageData () {
       this.$http.get(this.$store.state.backendURL + '/api/page/' + this.path + '?format=no-render').then(
         res => {
           this.error = 0
@@ -129,7 +172,7 @@ export default {
           }
         })
     },
-    loadAsyncPreviewData: function () {
+    loadAsyncPreviewData () {
       this.$http.post(
         this.$store.state.backendURL + '/api/preview',
         {'content': this.page.content}
@@ -142,7 +185,19 @@ export default {
         }
       )
     },
-    redirectToPage: function (homepage) {
+    loadFileManager () {
+      this.$http.get(
+        this.$store.state.backendURL + '/api/list/' + this.folder(this.path)
+      ).then(
+        res => {
+          this.error = 0
+          this.files = res.body
+        }, res => {
+          this.error = res.status
+        }
+      )
+    },
+    redirectToPage (homepage) {
       // on main page, go direct
       if (homepage === 'index.md') {
         this.$router.push({
@@ -228,6 +283,27 @@ export default {
       if (index === 1) {
         this.loadAsyncPreviewData()
       }
+      if (index === 2) {
+        this.loadFileManager()
+      }
+    },
+    folder (path) {
+      return path.substr(0, path.lastIndexOf('/'))
+    },
+    humanFileSize (bytes, si) {
+      var thresh = si ? 1000 : 1024
+      if (Math.abs(bytes) < thresh) {
+        return bytes + ' B'
+      }
+      var units = si
+        ? ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+        : ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+      var u = -1
+      do {
+        bytes /= thresh
+        ++u
+      } while (Math.abs(bytes) >= thresh && u < units.length - 1)
+      return bytes.toFixed(1) + ' ' + units[u]
     }
   }
 }
