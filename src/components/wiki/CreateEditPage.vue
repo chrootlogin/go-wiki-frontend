@@ -67,6 +67,30 @@
               </section>
             </template>
           </b-table>
+          <div>
+            <div class="dropbox">
+              <input
+                :name="uploadFieldName"
+                :disabled="isSaving"
+                type="file"
+                multiple
+                accept="*/*"
+                class="input-file"
+                @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length">
+              <p v-if="isInitial">
+                Click to browse or drag your file(s) here to upload
+              </p>
+              <p v-if="isSaving">
+                Uploading {{ fileCount }} files...
+              </p>
+              <p v-if="isFailed">
+                Upload failed: {{ uploadMessage }}
+              </p>
+              <p v-if="isSuccess">
+                Upload successful: {{ uploadMessage }}
+              </p>
+            </div>
+          </div>
         </b-tab-item>
         <b-tab-item label="Settings">
           <b-field label="Path">
@@ -86,6 +110,7 @@
           </span>
         </button>
         <button
+          v-if="activeEditorTab !== 2"
           :class="{'is-loading': loading}"
           class="button is-primary"
           @click="save">
@@ -101,6 +126,11 @@
 
 <script>
 import markdownEditor from 'vue-simplemde/src/markdown-editor.vue'
+
+const STATUS_INITIAL = 0
+const STATUS_SAVING = 1
+const STATUS_SUCCESS = 2
+const STATUS_FAILED = 3
 
 export default {
   components: {
@@ -120,7 +150,10 @@ export default {
       files: {
         files: [],
         path: ''
-      }
+      },
+      uploadMessage: null,
+      currentStatus: null,
+      uploadFieldName: 'file'
     }
   },
   computed: {
@@ -138,6 +171,19 @@ export default {
       }
 
       return path
+    },
+    // Upload form
+    isInitial () {
+      return this.currentStatus === STATUS_INITIAL
+    },
+    isSaving () {
+      return this.currentStatus === STATUS_SAVING
+    },
+    isSuccess () {
+      return this.currentStatus === STATUS_SUCCESS
+    },
+    isFailed () {
+      return this.currentStatus === STATUS_FAILED
     }
   },
   watch: {
@@ -147,6 +193,7 @@ export default {
   },
   mounted: function () {
     this.loadAsyncPageData()
+    this.resetUpload()
   },
   methods: {
     loadAsyncPageData () {
@@ -304,6 +351,44 @@ export default {
         ++u
       } while (Math.abs(bytes) >= thresh && u < units.length - 1)
       return bytes.toFixed(1) + ' ' + units[u]
+    },
+    // File upload
+    resetUpload () {
+      // reset form to initial state
+      this.currentStatus = STATUS_INITIAL
+      this.uploadMessage = null
+    },
+    saveFile (formData) {
+      // upload data to the server
+      this.currentStatus = STATUS_SAVING
+
+      this.$http.post(
+        this.$store.state.backendURL + '/api/raw/' + this.folder(this.path),
+        formData
+      ).then(res => {
+        this.uploadMessage = res.body.message
+        this.currentStatus = STATUS_SUCCESS
+        this.loadFileManager()
+      }).catch(err => {
+        this.uploadMessage = err.response
+        this.currentStatus = STATUS_FAILED
+      })
+    },
+    filesChange (fieldName, fileList) {
+      // handle file changes
+      const formData = new FormData()
+
+      if (!fileList.length) return
+
+      // append the files to FormData
+      Array
+        .from(Array(fileList.length).keys())
+        .map(x => {
+          formData.append(fieldName, fileList[x], fileList[x].name)
+        })
+
+      // save it
+      this.saveFile(formData)
     }
   }
 }
