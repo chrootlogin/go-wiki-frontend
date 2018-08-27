@@ -25,7 +25,7 @@
 
       <div class="navbar-end">
         <router-link
-          v-if="!user"
+          v-if="!user && configuration.registration"
           to="/register"
           class="navbar-item">
           Register
@@ -161,6 +161,9 @@ export default {
     },
     permissions () {
       return this.$store.state.permissions
+    },
+    configuration () {
+      return this.$store.state.configuration
     }
   },
   methods: {

@@ -30,5 +30,8 @@ export const mutations = {
   },
   setPermissions (state, {permissions}) {
     state.permissions = permissions
+  },
+  setConfiguration (state, {configuration}) {
+    state.configuration = configuration
   }
 }
