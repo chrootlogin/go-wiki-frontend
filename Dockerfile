@@ -8,6 +8,8 @@ RUN set -ex \
     && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     nasm
 
+RUN npm -g install npm
+
 WORKDIR /tmp/go-wiki-frontend
 
 RUN make clean all
