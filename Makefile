@@ -7,7 +7,7 @@ all: web_app
 
 web_app:
 	$(NPM) install
-	$(NPM) run build
+	NODE_ENV=production $(NPM) run build
 
 go_plugin:
 	$(DEP) ensure

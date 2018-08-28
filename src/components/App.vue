@@ -1,5 +1,15 @@
 <template>
   <div>
+    <div
+      v-if="environment === 'development'">
+      <div class="has-background-warning">
+        <div class="container content">
+          <i
+            class="fa fa-exclamation-triangle"
+            aria-hidden="true"/> Warning! You're running in development mode!
+        </div>
+      </div>
+    </div>
     <navbar/>
     <notification/>
     <router-view/>
@@ -22,7 +32,12 @@
 
 <script>
 export default {
-  mounted: function () {
+  computed: {
+    environment () {
+      return process.env.NODE_ENV
+    }
+  },
+  mounted () {
     this.setConfiguration()
 
     // when user is set, reload permissions
@@ -36,12 +51,14 @@ export default {
   methods: {
     // set global permissions
     setPermissions () {
-      this.$http.get(this.$store.state.backendURL + '/api/user/permissions').then(res => {
-        this.$store.commit('setPermissions', {
-          permissions: res.body
+      this.$http.get(this.$store.state.backendURL + '/api/user/permissions')
+        .then(res => {
+          this.$store.commit('setPermissions', {
+            permissions: res.body
+          })
         })
-      })
     },
+    // set configuration
     setConfiguration () {
       this.$http.get(this.$store.state.backendURL + '/api/config')
         .then(res => {

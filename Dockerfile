@@ -1,6 +1,8 @@
 # Build build-container
 FROM node:8 as builder
 
+ENV NODE_ENV=production
+
 COPY . /tmp/go-wiki-frontend
 
 RUN set -ex \
