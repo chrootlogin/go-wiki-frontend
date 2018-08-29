@@ -3,9 +3,7 @@ export const STORAGE_KEY = 'go-wiki'
 export const state = {
   backendURL: (function () {
     let env = process.env.NODE_ENV
-
-    console.log(env)
-    /* if (env === 'production') {
+    if (env === 'production') {
       let loc = window.location
 
       let port = ''
@@ -14,7 +12,7 @@ export const state = {
       }
 
       return loc.protocol + '//' + loc.host + port
-    } */
+    }
 
     return 'http://localhost:8000'
   })(),
