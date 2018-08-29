@@ -14,7 +14,7 @@ WORKDIR /tmp/go-wiki-frontend
 
 RUN make clean all
 
-FROM nginx:mainline-alpine
+FROM nginx:stable-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
