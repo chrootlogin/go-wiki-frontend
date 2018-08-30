@@ -1,14 +1,15 @@
 package main
 
 import (
+	"strings"
+	"time"
+	"net/http"
+	"path/filepath"
+
 	"github.com/hashicorp/go-plugin"
 	"github.com/chrootlogin/go-wiki-plugin-sdk"
 
 	"github.com/chrootlogin/go-wiki-frontend/gosrc/frontend"
-	"strings"
-	"net/http"
-	"time"
-	"path/filepath"
 )
 
 type goWikiPlugin struct {
