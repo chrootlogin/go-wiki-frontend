@@ -16,6 +16,10 @@ jobs:
       apt:
         packages:
         - nasm
+      sonarcloud:
+        organization: chrootlogin-github
+        token:
+          secure: nftaRg2Eozxp/eOSzIdubSIGeqffmj8iiK07Y2rbv5tmctV+LNY+p9V2CqxPKf3ZyDXp3QStlsJfh8SxhyigAWYowW8M00qk7ROvpbKkkKVONf4fHe2eiyUAyb5tRQ6rJLaj7KdFL2VJvvJbivGs91t2/eYZ4UoYOA8fPK43pHwPMWWVn+s/OlVktKQ1Hab0ZpEj64dMz6S4bIUsKrpUFYxrty4xf/7qEUbCK9uaet2v3vaV9tXf0ddt98R0+CRfdesuHJwt1vb6RfnYs6Jsn10/YYwQIJ8R5r/SDFZyO48Y6GTWOeL7y6Ld/QcvZ8cTve36IqRUWX5l3ftzHPE/q7cL57W1GcDQW27H0yXBuKkKfBt8d3/qrWrV7qOrp6Jh+qPXYBR6bPUqjs5IGUNwnhL1o/2LbCawacvjayDH2LIJMu8SWUo+RQyS0qZrG+Zum8t15hVy1wMey+Ii9X6dysGpIVue7Y8uoH9nUb3WbC3WLRWKMO3rLtw0Oes2NOsp8FMwBtyOlDfiKURFe/i3gwj2gvWORai7K3ZTZ1QJrA2THORsDA3c3CJc4TEm5qnDAUZuLaYacuf1gAuEgamixsgxb0Z8H0fzD5KdCPsFpv/5mkuoenL8d0Bi3mCW+bf0ES0OuR4me2oSKOdTiD+PJ/0mJsp/gqCMY/3ULOGJtQ4=
 
     cache:
       directories:
@@ -31,6 +35,7 @@ jobs:
     - # skip
 
     script:
+    - sonar-scanner
     - make web_app go_plugin
 
     deploy:
