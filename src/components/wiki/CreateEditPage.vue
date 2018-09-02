@@ -385,6 +385,7 @@ export default {
         .from(Array(fileList.length).keys())
         .map(x => {
           formData.append(fieldName, fileList[x], fileList[x].name)
+          return x
         })
 
       // save it
