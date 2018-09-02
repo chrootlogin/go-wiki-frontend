@@ -9,7 +9,7 @@ env:
 jobs:
   include:
   - language: go
-    go: 1.10.x
+    go: 1.11.x
     node_js: lts/*
 
     addons:
@@ -47,7 +47,7 @@ jobs:
           tags: true
 
   - language: go
-    go: 1.10.x
+    go: 1.11.x
     sudo: required
 
     if: (tag =~ ^v) OR (branch IN (master, develop))
