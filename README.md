@@ -1,4 +1,6 @@
 # Go-Wiki Frontend Plugin
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fchrootlogin%2Fgo-wiki-frontend.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fchrootlogin%2Fgo-wiki-frontend?ref=badge_shield)
+
 
 **WIP: Work in Progress**
 
@@ -23,3 +25,5 @@ You can use the included Makefile. Enter `make clean web_app go_plugin` to build
 ## License
 
 GPL 3.0 and higher
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fchrootlogin%2Fgo-wiki-frontend.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fchrootlogin%2Fgo-wiki-frontend?ref=badge_large)
